@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+    <title>Read (All)</title>
+</head>
+<body>
+    <div class="container">
+        <div class="pagePad">
+            <table class="table caption-top formBox">
+                <p class="display-4">All Users</p>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for each_row in users %}
+                    <tr>
+                        <th scope="row">{{ each_row.id }}</th>
+                        <td>{{ each_row.first_name + ' ' + each_row.last_name}}</td>
+                        <td>{{ each_row.email }}</td>
+                        <td>{{ each_row.created_at }}</td>
+                        <td>
+                            <a href="/users/{{ each_row.id }}">Show</a>
+                            <p class="d-inline-block">|</p>
+                            <a href="/users/{{ each_row.id }}/edit">Edit</a>
+                            <p class="d-inline-block">|</p>
+                            <a href="/delete/{{ each_row.id }}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/create.html" class="ms-1 mt-3">Add a new user</a>
+        </div>
+    </div>
+</body>
+</html>
